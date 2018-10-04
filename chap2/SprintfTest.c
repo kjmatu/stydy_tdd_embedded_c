@@ -76,6 +76,18 @@ TEST(sprintf, InsertNumber)
     given(sprintf(output, "%d\n", 10));
 }
 
+TEST(sprintf, OutputSmallCaseHex)
+{
+    expect("a\n");
+    given(sprintf(output, "%x\n", 10));
+}
+
+TEST(sprintf, OutputBigCaseHex)
+{
+    expect("A\n");
+    given(sprintf(output, "%X\n", 10));
+}
+
 #endif
 
 /* to run this also change in SprintfTestRunner.c */
