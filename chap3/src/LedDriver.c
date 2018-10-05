@@ -17,6 +17,11 @@ void LedDriver_TurnOn(uint16_t ledNumber)
     *ledsAdress = 1;
 }
 
+void LedDriver_TurnOff(uint16_t ledNumber)
+{
+    *ledsAdress = 0;
+}
+
 void LedDriver_Destroy(void)
 {
 }
