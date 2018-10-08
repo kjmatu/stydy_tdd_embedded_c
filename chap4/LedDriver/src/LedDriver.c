@@ -33,12 +33,16 @@ void LedDriver_Create(uint16_t * address)
 
 void LedDriver_TurnOn(uint16_t ledNumber)
 {
+    if (ledNumber <= 0 || ledNumber > 16)
+        return;
     ledsImage |= convertLedNumberToBit(ledNumber);
     upateHardware();
 }
 
 void LedDriver_TurnOff(uint16_t ledNumber)
 {
+    if (ledNumber <= 0 || ledNumber > 16)
+         return;
     ledsImage &= ~(convertLedNumberToBit(ledNumber));
     upateHardware();
 }
