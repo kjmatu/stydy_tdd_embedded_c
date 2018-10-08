@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <memory.h>
 
@@ -8,10 +9,25 @@ static uint16_t * ledsAddress;
 static uint16_t ledsImage;
 
 enum {ALL_LEDS_ON = ~0, ALL_LEDS_OFF = ~ALL_LEDS_ON};
-
 static uint16_t convertLedNumberToBit(int ledNumber)
 {
     return 1 << (ledNumber - 1);
+}
+
+static void setLedImageBit(int ledNumber)
+{
+    ledsImage |= convertLedNumberToBit(ledNumber);
+}
+
+static void clearLedImageBit(int ledNumber)
+{
+    ledsImage &= ~convertLedNumberToBit(ledNumber);
+}
+
+enum {FIRST_LED = 1, LAST_LED = 16};
+static bool IsLedOutOfBounds(int ledNumber)
+{
+    return (ledNumber < FIRST_LED) || (ledNumber > LAST_LED);
 }
 
 static void upateHardware(void)
@@ -33,17 +49,17 @@ void LedDriver_Create(uint16_t * address)
 
 void LedDriver_TurnOn(uint16_t ledNumber)
 {
-    if (ledNumber <= 0 || ledNumber > 16)
+    if (IsLedOutOfBounds(ledNumber))
         return;
-    ledsImage |= convertLedNumberToBit(ledNumber);
+    setLedImageBit(ledNumber);
     upateHardware();
 }
 
 void LedDriver_TurnOff(uint16_t ledNumber)
 {
-    if (ledNumber <= 0 || ledNumber > 16)
+    if (IsLedOutOfBounds(ledNumber))
          return;
-    ledsImage &= ~(convertLedNumberToBit(ledNumber));
+    clearLedImageBit(ledNumber);
     upateHardware();
 }
 
