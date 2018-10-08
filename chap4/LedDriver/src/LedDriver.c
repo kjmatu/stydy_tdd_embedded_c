@@ -69,6 +69,12 @@ void LedDriver_TurnAllOn(void)
     upateHardware();
 }
 
+void LedDriver_TurnAllOff(void)
+{
+    ledsImage = ALL_LEDS_OFF;
+    upateHardware();
+}
+
 bool LedDriver_IsOn(uint16_t ledNumber)
 {
     uint16_t ledStatus = ledsImage & convertLedNumberToBit(ledNumber);
