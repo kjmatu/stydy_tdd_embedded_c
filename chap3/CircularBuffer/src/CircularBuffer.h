@@ -1,1 +1,3 @@
-void CIrcularBuffer_Create(void);
+typedef int* CircularBuffer;
+
+CircularBuffer CircularBuffer_Create(int bufferSize);
