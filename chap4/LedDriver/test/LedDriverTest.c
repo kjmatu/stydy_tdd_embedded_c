@@ -116,3 +116,11 @@ TEST(LedDriver, OutOfBoundsLedsAreaAlwaysOff)
     TEST_ASSERT_FALSE(LedDriver_IsOn(0));
     TEST_ASSERT_FALSE(LedDriver_IsOn(17));
 }
+
+TEST(LedDriver, TurnOffMultipleLeds)
+{
+    LedDriver_TurnAllOn();
+    LedDriver_TurnOff(9);
+    LedDriver_TurnOff(8);
+    TEST_ASSERT_EQUAL_HEX16((~0x180) & 0xFFFF, virtualLeds);
+}
