@@ -94,3 +94,10 @@ TEST(LedDriver, OutOfBoundsTurnOffDoesNoHarm)
     LedDriver_TurnOff(3141);
     TEST_ASSERT_EQUAL_HEX16(0xFFFF, virtualLeds);
 }
+
+TEST(LedDriver, IsOn)
+{
+    TEST_ASSERT_FALSE(LedDriver_IsOn(11));
+    LedDriver_TurnOn(11);
+    TEST_ASSERT_TRUE(LedDriver_IsOn(11));
+}
