@@ -101,3 +101,10 @@ TEST(LedDriver, IsOn)
     LedDriver_TurnOn(11);
     TEST_ASSERT_TRUE(LedDriver_IsOn(11));
 }
+
+TEST(LedDriver, IsOff)
+{
+    TEST_ASSERT_TRUE(LedDriver_IsOff(12));
+    LedDriver_TurnOn(12);
+    TEST_ASSERT_FALSE(LedDriver_IsOff(12));
+}

@@ -75,6 +75,11 @@ bool LedDriver_IsOn(uint16_t ledNumber)
     return (0 != ledStatus);
 }
 
+bool LedDriver_IsOff(uint16_t ledNumber)
+{
+    return !LedDriver_IsOn(ledNumber);
+}
+
 void LedDriver_Destroy(void)
 {
 }
