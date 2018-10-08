@@ -61,6 +61,9 @@ TEST(LedDriver, TurnOffAnyLed)
 
 TEST(LedDriver, LedMemoryIsNotRedable)
 {
+    // TEST_SETUPのLedDriver_CreatedでLedは0に初期化されている
+    // Ledが読めないならば0xFFFFをLedアドレスに書き込んでも
+    // virtualLedsは0xFFFFを返してこないはず
     virtualLeds = 0xFFFF;
     LedDriver_TurnOn(8);
     TEST_ASSERT_EQUAL_HEX16(0x80, virtualLeds);
