@@ -6,6 +6,11 @@
 
 static uint16_t * ledsAdress;
 
+static uint16_t convertLedNumberToBit(int ledNumber)
+{
+    return 1 << (ledNumber - 1);
+}
+
 void LedDriver_Create(uint16_t * address)
 {
     ledsAdress = address;
@@ -14,7 +19,7 @@ void LedDriver_Create(uint16_t * address)
 
 void LedDriver_TurnOn(uint16_t ledNumber)
 {
-    *ledsAdress |= (1 << (ledNumber - 1));
+    *ledsAdress |= convertLedNumberToBit(ledNumber);
 }
 
 void LedDriver_TurnOff(uint16_t ledNumber)
