@@ -13,7 +13,7 @@ typedef struct CircularBufferStruct {
 
 CircularBuffer CircularBuffer_Create(int bufferSize)
 {
-
+    if (bufferSize == 0) return NULL;
     CircularBuffer self = calloc(1, sizeof(CircularBufferStruct));
     self->value = (int *)calloc(bufferSize, sizeof(int));
     self->size = bufferSize;

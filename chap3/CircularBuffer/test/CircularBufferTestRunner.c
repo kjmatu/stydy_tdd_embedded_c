@@ -13,4 +13,5 @@ TEST_GROUP_RUNNER(CircularBuffer)
     RUN_TEST_CASE(CircularBuffer, IsFullWithEmptyBuffer);
     RUN_TEST_CASE(CircularBuffer, FullBufferPushError);
     RUN_TEST_CASE(CircularBuffer, EmptyBufferPopError);
+    RUN_TEST_CASE(CircularBuffer, SizeZeroBufferCreate);
 }

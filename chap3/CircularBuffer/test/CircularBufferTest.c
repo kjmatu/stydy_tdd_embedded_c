@@ -113,3 +113,9 @@ TEST(CircularBuffer, EmptyBufferPopError)
     TEST_ASSERT_EQUAL_INT(-1, ret);
     TEST_ASSERT_EQUAL_INT(0, popValue);
 }
+
+TEST(CircularBuffer, SizeZeroBufferCreate)
+{
+    self = CircularBuffer_Create(0);
+    TEST_ASSERT_NULL(self);
+}
