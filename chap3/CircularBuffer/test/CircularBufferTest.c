@@ -39,10 +39,11 @@ TEST(CircularBuffer, PushValue)
 
 TEST(CircularBuffer, PopValue)
 {
-    int popValue;
+    int popValue, ret;
     CircularBuffer_Push(self, 10);
-    popValue = CircularBuffer_Pop(self);
+    ret = CircularBuffer_Pop(self, &popValue);
     TEST_ASSERT_EQUAL_INT(10, popValue);
+    TEST_ASSERT_EQUAL_INT(0, ret);
 }
 
 TEST(CircularBuffer, MultiPushValue)
@@ -58,16 +59,21 @@ TEST(CircularBuffer, MultiPushValue)
 
 TEST(CircularBuffer, MultiPopValue)
 {
-    int popValue;
+    int popValue, ret;
     CircularBuffer_Push(self, 1);
     CircularBuffer_Push(self, 2);
     CircularBuffer_Push(self, 3);
-    popValue = CircularBuffer_Pop(self);
+    ret = CircularBuffer_Pop(self, &popValue);
     TEST_ASSERT_EQUAL_INT(1, popValue);
-    popValue = CircularBuffer_Pop(self);
+    TEST_ASSERT_EQUAL_INT(0, ret);
+
+    ret = CircularBuffer_Pop(self, &popValue);
     TEST_ASSERT_EQUAL_INT(2, popValue);
-    popValue = CircularBuffer_Pop(self);
+    TEST_ASSERT_EQUAL_INT(0, ret);
+
+    ret = CircularBuffer_Pop(self, &popValue);
     TEST_ASSERT_EQUAL_INT(3, popValue);
+    TEST_ASSERT_EQUAL_INT(0, ret);
 }
 
 TEST(CircularBuffer, IsEmptyWithEmptyBuffer)
@@ -90,7 +96,7 @@ TEST(CircularBuffer, IsFullWithEmptyBuffer)
     TEST_ASSERT_FALSE(CircularBuffer_IsFull(self));
 }
 
-TEST(CircularBuffer, BufferOverError)
+TEST(CircularBuffer, FullBufferPushError)
 {
     for(int i = 0; i < BUFFER_SIZE; i++)
     {
@@ -98,4 +104,12 @@ TEST(CircularBuffer, BufferOverError)
     }
     int ret = CircularBuffer_Push(self, 11);
     TEST_ASSERT_EQUAL_INT(0, ret);
+}
+
+TEST(CircularBuffer, EmptyBufferPopError)
+{
+    int popValue, ret;
+    ret = CircularBuffer_Pop(self, &popValue);
+    TEST_ASSERT_EQUAL_INT(-1, ret);
+    TEST_ASSERT_EQUAL_INT(0, popValue);
 }

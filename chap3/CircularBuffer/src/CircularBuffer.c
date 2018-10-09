@@ -30,12 +30,15 @@ int CircularBuffer_Push(CircularBuffer self, int pushVal)
     return 1;
 }
 
-int CircularBuffer_Pop(CircularBuffer self)
+int CircularBuffer_Pop(CircularBuffer self, int *output)
 {
-    int popValue;
-    popValue = self->value[self->popIndex];
+    if (self->popIndex >= self->pushIndex) {
+        *output = 0;
+        return -1;
+    }
+    *output = self->value[self->popIndex];
     self->popIndex++;
-    return popValue;
+    return 0;
 }
 
 int CircularBuffer_GetSize(CircularBuffer self)

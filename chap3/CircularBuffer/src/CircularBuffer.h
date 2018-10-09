@@ -7,7 +7,7 @@ CircularBuffer CircularBuffer_Create(int bufferSize);
 int CircularBuffer_GetSize(CircularBuffer self);
 void CircularBuffer_Print(CircularBuffer self);
 int CircularBuffer_Push(CircularBuffer self, int pushVal);
-int CircularBuffer_Pop(CircularBuffer self);
+int CircularBuffer_Pop(CircularBuffer self, int *output);
 bool CircularBuffer_IsEmpty(CircularBuffer self);
 bool CircularBuffer_IsFull(CircularBuffer self);
 
