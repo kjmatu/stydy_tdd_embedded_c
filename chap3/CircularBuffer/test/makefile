@@ -38,8 +38,8 @@ CFLAGS += -Wold-style-definition
 
 TARGET_BASE=circularbuffer
 TARGET = $(TARGET_BASE)$(TARGET_EXTENSION)
-SRC_FILES=$(UNITY_ROOT)/src/unity.c $(UNITY_ROOT)/extras/fixture/src/unity_fixture.c ../src/CircularBuffer.c CircularBufferTest.c CircularBufferTestRunner.c AllTests.c
-INC_DIRS=-I../src/ -I$(UNITY_ROOT)/src -I$(UNITY_ROOT)/extras/fixture/src
+SRC_FILES=$(UNITY_ROOT)/src/unity.c $(UNITY_ROOT)/extras/fixture/src/unity_fixture.c ../src/CircularBuffer.c CircularBufferTest.c CircularBufferTestRunner.c AllTests.c Utils.c
+INC_DIRS=-I../src/ -I$(UNITY_ROOT)/src -I$(UNITY_ROOT)/extras/fixture/src -I./
 SYMBOLS=
 
 all: clean default
