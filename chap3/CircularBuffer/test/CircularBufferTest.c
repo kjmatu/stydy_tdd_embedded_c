@@ -84,3 +84,8 @@ TEST(CircularBuffer, IsEmptyWithFullBuffer)
     }
     TEST_ASSERT_FALSE(CircularBuffer_IsEmpty(self));
 }
+
+TEST(CircularBuffer, IsFullWithEmptyBuffer)
+{
+    TEST_ASSERT_FALSE(CircularBuffer_IsFull(self));
+}

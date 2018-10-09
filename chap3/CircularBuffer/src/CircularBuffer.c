@@ -48,6 +48,11 @@ bool CircularBuffer_IsEmpty(CircularBuffer self)
     else return false;
 }
 
+bool CircularBuffer_IsFull(CircularBuffer self)
+{
+    return false;
+}
+
 // void CircularBuffer_Print(CircularBuffer self)
 // {
 //     FormatOutput("CircularBufferValues\n");
