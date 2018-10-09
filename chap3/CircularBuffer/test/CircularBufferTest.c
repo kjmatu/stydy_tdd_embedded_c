@@ -44,3 +44,14 @@ TEST(CircularBuffer, PopValue)
     popValue = CircularBuffer_Pop(self);
     TEST_ASSERT_EQUAL_INT(10, popValue);
 }
+
+TEST(CircularBuffer, MultiPushValue)
+{
+    int ret;
+    ret = CircularBuffer_Push(self, 1);
+    TEST_ASSERT_EQUAL_INT(1, ret);
+    ret = CircularBuffer_Push(self, 2);
+    TEST_ASSERT_EQUAL_INT(1, ret);
+    ret = CircularBuffer_Push(self, 3);
+    TEST_ASSERT_EQUAL_INT(1, ret);
+}

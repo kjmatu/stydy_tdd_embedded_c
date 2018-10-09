@@ -6,4 +6,5 @@ TEST_GROUP_RUNNER(CircularBuffer)
     RUN_TEST_CASE(CircularBuffer, GerBufferSize);
     RUN_TEST_CASE(CircularBuffer, PushValue);
     RUN_TEST_CASE(CircularBuffer, PopValue);
+    RUN_TEST_CASE(CircularBuffer, MultiPushValue);
 }
