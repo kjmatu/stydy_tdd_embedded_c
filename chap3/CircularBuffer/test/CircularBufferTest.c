@@ -69,3 +69,18 @@ TEST(CircularBuffer, MultiPopValue)
     popValue = CircularBuffer_Pop(self);
     TEST_ASSERT_EQUAL_INT(3, popValue);
 }
+
+TEST(CircularBuffer, IsEmptyWithEmptyBuffer)
+{
+    TEST_ASSERT_TRUE(CircularBuffer_IsEmpty(self));
+}
+
+TEST(CircularBuffer, IsEmptyWithFullBuffer)
+{
+
+    for(int i = 0; i < BUFFER_SIZE; i++)
+    {
+        CircularBuffer_Push(self, i);
+    }
+    TEST_ASSERT_FALSE(CircularBuffer_IsEmpty(self));
+}

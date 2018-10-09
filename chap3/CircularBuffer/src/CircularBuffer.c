@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "CircularBuffer.h"
 #include "Utils.h"
@@ -39,6 +40,12 @@ int CircularBuffer_Pop(CircularBuffer self)
 int CircularBuffer_GetSize(CircularBuffer self)
 {
     return self->size;
+}
+
+bool CircularBuffer_IsEmpty(CircularBuffer self)
+{
+    if (self->pushIndex == 0) return true;
+    else return false;
 }
 
 // void CircularBuffer_Print(CircularBuffer self)

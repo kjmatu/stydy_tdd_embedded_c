@@ -8,4 +8,6 @@ TEST_GROUP_RUNNER(CircularBuffer)
     RUN_TEST_CASE(CircularBuffer, PopValue);
     RUN_TEST_CASE(CircularBuffer, MultiPushValue);
     RUN_TEST_CASE(CircularBuffer, MultiPopValue);
+    RUN_TEST_CASE(CircularBuffer, IsEmptyWithEmptyBuffer);
+    RUN_TEST_CASE(CircularBuffer, IsEmptyWithFullBuffer);
 }
