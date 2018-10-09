@@ -89,3 +89,13 @@ TEST(CircularBuffer, IsFullWithEmptyBuffer)
 {
     TEST_ASSERT_FALSE(CircularBuffer_IsFull(self));
 }
+
+TEST(CircularBuffer, BufferOverError)
+{
+    for(int i = 0; i < BUFFER_SIZE; i++)
+    {
+        CircularBuffer_Push(self, i);
+    }
+    int ret = CircularBuffer_Push(self, 11);
+    TEST_ASSERT_EQUAL_INT(0, ret);
+}

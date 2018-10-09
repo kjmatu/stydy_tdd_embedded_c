@@ -24,6 +24,7 @@ CircularBuffer CircularBuffer_Create(int bufferSize)
 
 int CircularBuffer_Push(CircularBuffer self, int pushVal)
 {
+    if (self->pushIndex >= self->size) return 0;
     self->value[self->pushIndex] = pushVal;
     self->pushIndex++;
     return 1;
