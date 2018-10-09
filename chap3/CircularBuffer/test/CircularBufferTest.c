@@ -119,3 +119,18 @@ TEST(CircularBuffer, SizeZeroBufferCreate)
     self = CircularBuffer_Create(0);
     TEST_ASSERT_NULL(self);
 }
+
+TEST(CircularBuffer, FullPushFullPopAfterOnePush)
+{
+    for(int i = 0; i < BUFFER_SIZE; i++) {
+        CircularBuffer_Push(self, i);
+    }
+
+    int popValue = 0xFFFFF;
+    for(int i = 0; i < BUFFER_SIZE; i++) {
+        CircularBuffer_Pop(self, &popValue);
+    }
+
+    int ret = CircularBuffer_Push(self, 0xFF);
+    TEST_ASSERT_EQUAL_INT(ret, 1);
+}
