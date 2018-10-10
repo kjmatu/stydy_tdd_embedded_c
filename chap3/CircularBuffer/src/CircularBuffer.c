@@ -4,6 +4,8 @@
 #include "CircularBuffer.h"
 #include "Utils.h"
 
+#define BUFFER_SENTINEL (0xDEAD)
+
 typedef struct CircularBufferStruct {
     int *value;
     int size;
@@ -15,7 +17,8 @@ CircularBuffer CircularBuffer_Create(int bufferSize)
 {
     if (bufferSize == 0) return NULL;
     CircularBuffer self = calloc(1, sizeof(CircularBufferStruct));
-    self->value = (int *)calloc(bufferSize, sizeof(int));
+    self->value = (int *)calloc(bufferSize + 1, sizeof(int));
+    self->value[bufferSize] = BUFFER_SENTINEL;
     self->size = bufferSize;
     self->pushIndex = 0;
     self->popIndex = 0;
@@ -58,9 +61,15 @@ bool CircularBuffer_IsFull(CircularBuffer self)
     return false;
 }
 
+bool CircularBuffer_CheckBufferOverRun(CircularBuffer self)
+{
+    FormatOutput("End buffer[%d] %X\n", self->size, self->value[self->size]);
+    return (self->value[self->size] == BUFFER_SENTINEL);
+}
+
 // void CircularBuffer_Print(CircularBuffer self)
 // {
-//     FormatOutput("CircularBufferValues\n");
+//     FormatOutput("\nCircularBufferValues\n");
 //     int size = CircularBuffer_GetSize(self);
 //     for (int i = 0; i < size; i++)
 //     {

@@ -134,3 +134,8 @@ TEST(CircularBuffer, FullPushFullPopAfterOnePush)
     int ret = CircularBuffer_Push(self, 0xFF);
     TEST_ASSERT_EQUAL_INT(ret, 1);
 }
+
+TEST(CircularBuffer, CheckBufferOverRunWhenInit)
+{
+    TEST_ASSERT_TRUE(CircularBuffer_CheckBufferOverRun(self));
+}

@@ -10,5 +10,6 @@ int CircularBuffer_Push(CircularBuffer self, int pushVal);
 int CircularBuffer_Pop(CircularBuffer self, int *output);
 bool CircularBuffer_IsEmpty(CircularBuffer self);
 bool CircularBuffer_IsFull(CircularBuffer self);
+bool CircularBuffer_CheckBufferOverRun(CircularBuffer self);
 
 #endif
