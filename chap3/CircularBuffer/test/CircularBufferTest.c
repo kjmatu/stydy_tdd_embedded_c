@@ -139,3 +139,17 @@ TEST(CircularBuffer, CheckBufferOverRunWhenInit)
 {
     TEST_ASSERT_TRUE(CircularBuffer_CheckBufferOverRun(self));
 }
+
+TEST(CircularBuffer, CheckBufferOverRunWhenFullPushFullPopAfterOnePush)
+{
+    for(int i = 0; i < BUFFER_SIZE; i++) {
+        CircularBuffer_Push(self, i);
+    }
+
+    int popValue = 0xFFFFF;
+    for(int i = 0; i < BUFFER_SIZE; i++) {
+        CircularBuffer_Pop(self, &popValue);
+    }
+    CircularBuffer_Push(self, 0xFF);
+    TEST_ASSERT_TRUE(CircularBuffer_CheckBufferOverRun(self));
+}

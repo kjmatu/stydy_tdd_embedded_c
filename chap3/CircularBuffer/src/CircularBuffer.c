@@ -29,7 +29,7 @@ int CircularBuffer_Push(CircularBuffer self, int pushVal)
 {
     int capacity = self->pushIndex - self->popIndex;
     if (capacity >= self->size) return 0;
-    self->value[self->pushIndex] = pushVal;
+    self->value[self->pushIndex % self->size] = pushVal;
     self->pushIndex++;
     return 1;
 }
@@ -63,7 +63,6 @@ bool CircularBuffer_IsFull(CircularBuffer self)
 
 bool CircularBuffer_CheckBufferOverRun(CircularBuffer self)
 {
-    FormatOutput("End buffer[%d] %X\n", self->size, self->value[self->size]);
     return (self->value[self->size] == BUFFER_SENTINEL);
 }
 
