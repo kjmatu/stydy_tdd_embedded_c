@@ -4,7 +4,7 @@
 
 #include "unity_fixture.h"
 
-#define BUFFER_SIZE 10
+#define BUFFER_SIZE 2000
 
 static CircularBuffer self;
 
@@ -25,6 +25,12 @@ TEST(CircularBuffer, CreateCircularBuffer)
 {
     TEST_ASSERT_EQUAL_INT(BUFFER_SIZE, CircularBuffer_GetSize(self));
     TEST_ASSERT_TRUE(CircularBuffer_IsEmpty(self));
+}
+
+TEST(CircularBuffer, DeleteCircularBuffer)
+{
+    int ret = CircularBuffer_Delete(self);
+    TEST_ASSERT_EQUAL_INT(1, ret);
 }
 
 TEST(CircularBuffer, GerBufferSize)

@@ -25,6 +25,13 @@ CircularBuffer CircularBuffer_Create(int bufferSize)
     return self;
 }
 
+int CircularBuffer_Delete(CircularBuffer self)
+{
+    free(self->value);
+    free(self);
+    return 1;
+}
+
 int CircularBuffer_Push(CircularBuffer self, int pushVal)
 {
     int capacity = self->pushIndex - self->popIndex;
@@ -66,14 +73,14 @@ bool CircularBuffer_CheckBufferOverRun(CircularBuffer self)
     return (self->value[self->size] == BUFFER_SENTINEL);
 }
 
-void CircularBuffer_Print(CircularBuffer self)
-{
-    FormatOutput("\nCircularBufferValues\n");
-    int size = CircularBuffer_GetSize(self);
-    for (int i = 0; i < size; i++)
-    {
-        if(i != 0) FormatOutput(", ");
-        FormatOutput("%d", self->value[i]);
-    }
-    FormatOutput("\n");
-}
+// void CircularBuffer_Print(CircularBuffer self)
+// {
+//     FormatOutput("\nCircularBufferValues\n");
+//     int size = CircularBuffer_GetSize(self);
+//     for (int i = 0; i < size; i++)
+//     {
+//         if(i != 0) FormatOutput(", ");
+//         FormatOutput("%d", self->value[i]);
+//     }
+//     FormatOutput("\n");
+// }
