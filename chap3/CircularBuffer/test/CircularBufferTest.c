@@ -21,8 +21,10 @@ TEST_TEAR_DOWN(CircularBuffer)
 {
 }
 
-IGNORE_TEST(CircularBuffer, CreateCircularBuffer)
+TEST(CircularBuffer, CreateCircularBuffer)
 {
+    TEST_ASSERT_EQUAL_INT(BUFFER_SIZE, CircularBuffer_GetSize(self));
+    TEST_ASSERT_TRUE(CircularBuffer_IsEmpty(self));
 }
 
 TEST(CircularBuffer, GerBufferSize)
