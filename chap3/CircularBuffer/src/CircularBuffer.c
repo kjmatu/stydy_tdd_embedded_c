@@ -58,7 +58,7 @@ bool CircularBuffer_IsEmpty(CircularBuffer self)
 
 bool CircularBuffer_IsFull(CircularBuffer self)
 {
-    return false;
+    return ((self->pushIndex - self->popIndex) == self->size);
 }
 
 bool CircularBuffer_CheckBufferOverRun(CircularBuffer self)
@@ -66,14 +66,14 @@ bool CircularBuffer_CheckBufferOverRun(CircularBuffer self)
     return (self->value[self->size] == BUFFER_SENTINEL);
 }
 
-// void CircularBuffer_Print(CircularBuffer self)
-// {
-//     FormatOutput("\nCircularBufferValues\n");
-//     int size = CircularBuffer_GetSize(self);
-//     for (int i = 0; i < size; i++)
-//     {
-//         if(i != 0) FormatOutput(", ");
-//         FormatOutput("%d", self->value[i]);
-//     }
-//     FormatOutput("\n");
-// }
+void CircularBuffer_Print(CircularBuffer self)
+{
+    FormatOutput("\nCircularBufferValues\n");
+    int size = CircularBuffer_GetSize(self);
+    for (int i = 0; i < size; i++)
+    {
+        if(i != 0) FormatOutput(", ");
+        FormatOutput("%d", self->value[i]);
+    }
+    FormatOutput("\n");
+}
