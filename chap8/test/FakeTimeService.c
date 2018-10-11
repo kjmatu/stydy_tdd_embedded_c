@@ -25,68 +25,44 @@
 /*- ------------------------------------------------------------------ -*/
 
 #include "FakeTimeService.h"
-#include "common.h"
 
-static Time fakeTime;
-static WakeUpCallback callback;
-static int period;
+static long int theMinute;
+static int theDay;
 
 void TimeService_Create(void)
 {
-    fakeTime.minuteOfDay = -1;
-    fakeTime.dayOfWeek = -1;
-    callback = NULL;
-    period = -1;
+    theMinute = MINUTE_UNKNOWN;
+    theDay = DAY_UNKNOWN;
 }
 
 void TimeService_Destroy(void)
 {
 }
 
-void FakeTimeService_MinuteIsUp(void)
-{
-    if (callback != NULL);
-        callback();
-}
-
-void TimeService_SetPeriodicAlarmInSeconds(int seconds, WakeUpCallback cb)
-{
-    callback = cb;
-    period = seconds;
-}
-void TimeService_CancelPeriodicAlarmInSeconds(
-        int seconds, WakeUpCallback cb)
-{
-    if (cb == callback && period == seconds)
-    {
-        callback = NULL;
-        period = 0;
-    }
-}
-
 void TimeService_GetTime(Time * time)
 {
-    time->minuteOfDay = fakeTime.minuteOfDay;
-    time->dayOfWeek = fakeTime.dayOfWeek;
+    time->minuteOfDay = theMinute;
+    time->dayOfWeek = theDay;
+}
+
+
+int TimeService_GetMinute(void)
+{
+    return theMinute;
 }
 
 void FakeTimeService_SetMinute(int minute)
 {
-    fakeTime.minuteOfDay = minute;
+    theMinute = minute;
 }
 
 void FakeTimeService_SetDay(int day)
 {
-    fakeTime.dayOfWeek = day;
+    theDay = day;
 }
 
-WakeUpCallback FakeTimeService_GetAlarmCallback(void)
+int TimeService_GetDay(void)
 {
-    return callback;
-}
-
-int FakeTimeService_GetAlarmPeriod(void)
-{
-    return period;
+    return theDay;
 }
 

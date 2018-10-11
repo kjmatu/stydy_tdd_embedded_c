@@ -24,19 +24,18 @@
 /*-    www.renaissancesoftware.net james@renaissancesoftware.net       -*/
 /*- ------------------------------------------------------------------ -*/
 
-
 #include "LightControllerSpy.h"
 #include "memory.h"
 
 static int lastId;
-static int lastState;
+static int lastLevel;
 static int count;
 static int lights[MAX_LIGHTS];
 
 void LightController_Create(void)
 {
     lastId = LIGHT_ID_UNKNOWN;
-    lastState = LIGHT_STATE_UNKNOWN;
+    lastLevel = LIGHT_STATE_UNKNOWN;
     count = 0;
     memset(lights, LIGHT_STATE_UNKNOWN, sizeof lights);
 }
@@ -52,29 +51,29 @@ int LightControllerSpy_GetLastId(void)
 
 int LightControllerSpy_GetLastState(void)
 {
-    return lastState;
+    return lastLevel;
 }
 
 static int isIdInRange(int id)
 {
-    return id >= 0 && id <= 31;
+    return id > 0 && id <=32;
 }
-void LightController_On(int id)
+void LightController_TurnOn(int id)
 {
     lastId = id;
-    lastState = 1;
+    lastLevel = 1;
     count++;
     if (isIdInRange(id))
-        lights[id] = LIGHT_ON;
+        lights[id-1] = LIGHT_ON;
 }
 
-void LightController_Off(int id)
+void LightController_TurnOff(int id)
 {
     lastId = id;
-    lastState = 0;
+    lastLevel = 0;
     count++;
     if (isIdInRange(id))
-        lights[id] = LIGHT_OFF;
+        lights[id-1] = LIGHT_OFF;
 }
 
 int LightControllerSpy_GetEventCounts(void)
@@ -82,47 +81,50 @@ int LightControllerSpy_GetEventCounts(void)
     return count;
 }
 
-int LightControllerSpy_GetLightState(int id)
+LightState LightControllerSpy_GetLightState(int id)
 {
     if (!isIdInRange(id))
         return LIGHT_STATE_UNKNOWN;
-    return lights[id];
+    return lights[id-1];
 }
 
 #if 0
-#include "LightControllerSpy.h"
+#include "LightController.h"
 
-static int lastId;
-static int lastState;
+static int lastId; 
+static int lastLevel;
 
-void LightController_Create(void)
+void LightController_Create(void) 
 {
-    lastId = LIGHT_ID_UNKNOWN;
-    lastState = LIGHT_STATE_UNKNOWN;
+    lastId = -1;
+    lastLevel = -1;
 }
 
 void LightController_Destroy(void)
 {
 }
 
-void LightController_On(int id)
+void LightController_TurnOn(int id) 
 {
     lastId = id;
-    lastState = LIGHT_ON;
-}
-void LightController_Off(int id)
-{
-    lastId = id;
-    lastState = LIGHT_OFF;
+    lastLevel = 1;
 }
 
-int LightControllerSpy_GetLastId(void)
+void LightController_TurnOff(int id) 
+{
+    lastId = id;
+    lastLevel = 0;
+}
+
+int LightControllerSpy_GetLastId(void) 
 {
     return lastId;
 }
+
 int LightControllerSpy_GetLastState(void)
 {
-    return lastState;
+    return lastLevel;
 }
+
 
 #endif

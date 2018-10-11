@@ -16,37 +16,50 @@
 //-    www.renaissancesoftware.net james@renaissancesoftware.net      
 //- ------------------------------------------------------------------
 
+//START: original
 #include "CppUTest/TestHarness.h"
 
 extern "C"
 {
-#include "TimeService.h"
-#include "FakeTimeService.h"
+#include "LightControllerSpy.h"
 }
 
-TEST_GROUP(TimeService)
+TEST_GROUP(LightControllerSpy)
 {
     void setup()
     {
-      TimeService_Create();
+      LightController_Create();
     }
 
     void teardown()
     {
-       TimeService_Destroy();
+       LightController_Destroy();
     }
 };
 
-TEST(TimeService, Create)
+TEST(LightControllerSpy, Create)
 {
-    LONGS_EQUAL(-1, TimeService_GetMinute());
-    LONGS_EQUAL(-1, TimeService_GetDay());
+    LONGS_EQUAL(LIGHT_ID_UNKNOWN, LightControllerSpy_GetLastId());
+    LONGS_EQUAL(LIGHT_STATE_UNKNOWN, LightControllerSpy_GetLastState());
 }
 
-TEST(TimeService, Set)
+TEST(LightControllerSpy, RememberTheLastLightIdControlled)
 {
-    FakeTimeService_SetMinute(42);
-    LONGS_EQUAL(42, TimeService_GetMinute());
-    FakeTimeService_SetDay(3);
-    LONGS_EQUAL(3, TimeService_GetDay());
+    LightController_TurnOn(10);
+    LONGS_EQUAL(10, LightControllerSpy_GetLastId());
+    LONGS_EQUAL(1, LightControllerSpy_GetLastState());
 }
+//END: original
+
+//START: RememberAllLightStates
+TEST(LightControllerSpy, RememberAllLightStates)
+{
+    LONGS_EQUAL(LIGHT_STATE_UNKNOWN, LightControllerSpy_GetLightState(4));
+
+    LightController_TurnOn(4);
+    LONGS_EQUAL(LIGHT_ON, LightControllerSpy_GetLightState(4));
+
+    LightController_TurnOff(4);
+    LONGS_EQUAL(LIGHT_OFF, LightControllerSpy_GetLightState(4));
+}
+//END: RememberAllLightStates

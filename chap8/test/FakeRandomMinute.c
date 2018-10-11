@@ -24,29 +24,27 @@
 /*-    www.renaissancesoftware.net james@renaissancesoftware.net       -*/
 /*- ------------------------------------------------------------------ -*/
 
-#ifndef D_common_H
-#define D_common_H
+#include "FakeRandomMinute.h"
 
-#ifndef BOOL
-#define BOOL int
-#endif
+static int seed = -1;
+static int increment = -1;
 
-#ifndef TRUE
-#define TRUE 1
-#endif
+void FakeRandomMinute_Reset(void)
+{
+	seed = -1;
+	increment = -1;
+}
 
-#ifndef FALSE
-#define FALSE 0
-#endif
+void FakeRandomMinute_SetFirstAndIncrement(int s, int i)
+{
+	seed = s;
+	increment = i;
+}
 
-#ifndef NULL
-#define NULL 0
-#endif
+int FakeRandomMinute_Get(void)
+{
+	int result = seed;
+	seed += increment;
+	return result;
+}
 
-/*
- * this is used to represent production code that cannot run in the
- * test environment.
- */
-void explodesInTestEnvironment(void *);
-
-#endif

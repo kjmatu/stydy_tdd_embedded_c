@@ -30,12 +30,9 @@
 
 #include "TimeService.h"
 
-enum {TIME_UNKNOWN = -1};
-
 void FakeTimeService_SetMinute(int);
 void FakeTimeService_SetDay(int);
-WakeUpCallback FakeTimeService_GetAlarmCallback(void);
-int FakeTimeService_GetAlarmPeriod(void);
-void FakeTimeService_MinuteIsUp(void);
+
+enum {MINUTE_UNKNOWN = -1, DAY_UNKNOWN = -1 };
 
 #endif  /* D_FakeTimeService_H */

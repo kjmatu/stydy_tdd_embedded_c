@@ -24,11 +24,12 @@
 /*-    www.renaissancesoftware.net james@renaissancesoftware.net       -*/
 /*- ------------------------------------------------------------------ -*/
 
-#include "common.h"
-#include <assert.h>
+#ifndef D_FakeRandomMinute_H
+#define D_FakeRandomMinute_H
 
-void explodesInTestEnvironment(void * p)
-{
-	assert("Explode - intercepted call that cannot be made in test environment");
-    p = p;
-}
+#include "RandomMinute.h"
+
+void FakeRandomMinute_SetFirstAndIncrement(int seed, int increment);
+int FakeRandomMinute_Get(void);
+void FakeRandomMinute_Reset(void);
+#endif  /* D_RandomMinute_H */
