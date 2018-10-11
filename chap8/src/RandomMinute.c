@@ -24,45 +24,28 @@
 /*-    www.renaissancesoftware.net james@renaissancesoftware.net       -*/
 /*- ------------------------------------------------------------------ -*/
 
+#include "RandomMinute.h"
+#include <stdlib.h>
+#include <memory.h>
 
-#ifndef D_TimeService_H
-#define D_TimeService_H
+static int bound = 0;
 
-
-#include "common.h"
-
-typedef enum Day {
-    NOT_A_DAY=-4,
-    EVERYDAY=-3, WEEKDAY=-2, WEEKEND=-1,
-    SUNDAY=1, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-} Day;
-
-typedef enum Month {
-    JAN=1, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC
-} Month;
-
-typedef struct Time Time;
-
-struct Time
+void RandomMinute_Create(int b)
 {
-    int usec;
-    int sec;
-    int minuteOfDay;
-    int minuteOfHour;
-    Day dayOfWeek;
-    int dayOfMonth;
-    Month month;
-};
+    bound = b;
+    srand(10);
+}
 
-void TimeService_Create(void);
-void TimeService_Destroy(void);
-int TimeService_GetMinute(void);
-int TimeService_GetDay(void);
+int RandomMinute_GetImpl(void)
+{
+    return bound - rand() % (bound * 2 + 1);
+}
 
-void TimeService_GetTime(Time *);
+int (*RandomMinute_Get)(void) = RandomMinute_GetImpl;
 
-BOOL TimeService_MatchesDayOfWeek(const Time *, Day day);
-BOOL TimeService_MatchesMinuteOfDay(const Time *, int minute);
-BOOL TimeService_MatchesNow(int reactionDay, int minute);
-
-#endif  /* D_TimeService_H */
+#if 0 
+int RandomMinute_Get(void)
+{
+    return bound - rand() % (bound * 2 + 1);
+}
+#endif 

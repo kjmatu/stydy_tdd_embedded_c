@@ -25,44 +25,16 @@
 /*- ------------------------------------------------------------------ -*/
 
 
-#ifndef D_TimeService_H
-#define D_TimeService_H
+#ifndef D_RandomMinute_H
+#define D_RandomMinute_H
 
 
-#include "common.h"
+void RandomMinute_Create(int bound);
+extern int (*RandomMinute_Get)(void);
 
-typedef enum Day {
-    NOT_A_DAY=-4,
-    EVERYDAY=-3, WEEKDAY=-2, WEEKEND=-1,
-    SUNDAY=1, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-} Day;
+#if 0 
+void RandomMinute_Create(int bound);
+int RandomMinute_Get(void);
+#endif 
 
-typedef enum Month {
-    JAN=1, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC
-} Month;
-
-typedef struct Time Time;
-
-struct Time
-{
-    int usec;
-    int sec;
-    int minuteOfDay;
-    int minuteOfHour;
-    Day dayOfWeek;
-    int dayOfMonth;
-    Month month;
-};
-
-void TimeService_Create(void);
-void TimeService_Destroy(void);
-int TimeService_GetMinute(void);
-int TimeService_GetDay(void);
-
-void TimeService_GetTime(Time *);
-
-BOOL TimeService_MatchesDayOfWeek(const Time *, Day day);
-BOOL TimeService_MatchesMinuteOfDay(const Time *, int minute);
-BOOL TimeService_MatchesNow(int reactionDay, int minute);
-
-#endif  /* D_TimeService_H */
+#endif  /* D_RandomMinute_H */

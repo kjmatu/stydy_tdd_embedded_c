@@ -25,31 +25,25 @@
 /*- ------------------------------------------------------------------ -*/
 
 
-#include "TimeService.h"
-#include "common.h"
 
-void TimeService_Create(void)
-{
-	/* OS dependent init */
-	explodesInTestEnvironment(0);
-}
 
-void TimeService_Destroyvoid(void)
-{
-	/* OS dependent cleanup */
-	explodesInTestEnvironment(0);
-}
+#ifndef D_common_H
+#define D_common_H
 
-int TimeService_GetMinute(void)
-{
-	/* OS dependent get minute */
-	explodesInTestEnvironment(0);
-	return 0;
-}
+#ifndef BOOL
+#define BOOL int
+#endif
 
-int TimeService_GetDay(void)
-{
-	/* OS dependent get day */
-	explodesInTestEnvironment(0);
-	return 0;
-}
+#ifndef TRUE
+#define TRUE 1
+#endif
+
+#ifndef FALSE
+#define FALSE 0
+#endif
+
+#ifndef NULL
+#define NULL 0
+#endif
+
+#endif
