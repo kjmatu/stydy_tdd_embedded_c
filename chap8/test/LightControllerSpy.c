@@ -3,6 +3,16 @@
 static int lastId;
 static int lastState;
 
+int LightControllerSpy_GetLastId(void)
+{
+    return lastId;
+}
+
+int LightControllerSpy_GetLastState(void)
+{
+    return lastState;
+}
+
 void LightController_Create(void)
 {
     lastId = LIGHT_ID_UNKNOWN;
@@ -19,12 +29,8 @@ void LightController_On(int id)
     lastState = LIGHT_ON;
 }
 
-int LightControllerSpy_GetLastId(void)
+void LightController_Off(int id)
 {
-    return lastId;
-}
-
-int LightControllerSpy_GetLastState(void)
-{
-    return lastState;
+    lastId = id;
+    lastState = LIGHT_OFF;
 }
