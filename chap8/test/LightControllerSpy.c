@@ -13,6 +13,12 @@ void LightController_Destroy(void)
 {
 }
 
+void LightController_On(int id)
+{
+    lastId = id;
+    lastState = LIGHT_ON;
+}
+
 int LightControllerSpy_GetLastId(void)
 {
     return lastId;
