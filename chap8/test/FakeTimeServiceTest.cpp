@@ -9,18 +9,27 @@ TEST_GROUP(FakeTimeService)
 {
     void setup()
     {
+        TimeService_Create();
     }
 
     void teardown()
     {
+       TimeService_Destroy();
     }
 };
 
 
 TEST(FakeTimeService, Create)
 {
-    Time time;
-    TimeService_GetTime(&time);
-    LONGS_EQUAL(TIME_UNKNOWN, time.minuteOfDay);
-    LONGS_EQUAL(TIME_UNKNOWN, time.dayOfWeek);
-};
+    LONGS_EQUAL(MINUTE_UNKNOWN, TimeService_GetMinute());
+    LONGS_EQUAL(DAY_UNKNOWN, TimeService_GetDay());
+}
+
+
+TEST(FakeTimeService, Set)
+{
+    FakeTimeService_SetMinute(42);
+    FakeTimeService_SetDay(SATURDAY);
+    LONGS_EQUAL(42, TimeService_GetMinute());
+    LONGS_EQUAL(SATURDAY, TimeService_GetDay());
+}

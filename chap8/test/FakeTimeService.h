@@ -1,8 +1,14 @@
+#ifndef __FAKE_TIME_SERCIVE__
+#define __FAKE_TIME_SERCIVE__
+
 #include "TimeService.h"
 
 enum
 {
-    TIME_UNKNOWN = -1
+    MINUTE_UNKNOWN = -1, DAY_UNKNOWN = -1
 };
 
-void TimeService_GetTime(Time *fakeTime);
+void FakeTimeService_SetMinute(int minute);
+void FakeTimeService_SetDay(int day);
+
+#endif
