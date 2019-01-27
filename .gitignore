@@ -2,3 +2,7 @@
 *.o
 *.a
 *.d
+*.exe
+*.testpass
+
+HomeAutomation_tests
