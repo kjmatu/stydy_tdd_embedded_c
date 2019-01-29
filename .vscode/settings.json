@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "*.m": "matlab",
-        "lightscheduler.h": "c",
-        "unity_fixture.h": "c"
-    }
-}

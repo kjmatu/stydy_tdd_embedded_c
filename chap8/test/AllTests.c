@@ -3,6 +3,7 @@
 static void RunAllTests(void)
 {
     RUN_TEST_GROUP(LightScheduler);
+    RUN_TEST_GROUP(LightControllerSpy);
 }
 
 int main(int argc, const char * argv[])

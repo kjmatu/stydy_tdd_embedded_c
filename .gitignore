@@ -7,5 +7,4 @@
 
 HomeAutomation_tests
 
-./Unity/*
-./cpputest/*
+.vscode

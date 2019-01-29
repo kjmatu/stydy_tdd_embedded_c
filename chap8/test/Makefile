@@ -44,7 +44,7 @@ CFLAGS += -Wundef
 CFLAGS += -Wold-style-definition
 
 
-TARGET_BASE=chap8
+TARGET_BASE=homeautomation
 TARGET = $(TARGET_BASE)$(TARGET_EXTENSION)
 SRC_FILES=$(UNITY_ROOT)/src/unity.c\
 		$(UNITY_ROOT)/extras/fixture/src/unity_fixture.c\
@@ -52,11 +52,17 @@ SRC_FILES=$(UNITY_ROOT)/src/unity.c\
 		./../mock/LightControllerSpy.c\
 		./../src/LightScheduler.c\
 		./LightControllerSpyTest.c\
+		./LightControllerSpyTestRunner.c\
 		./LightSchedulerTestRunner.c\
 		./LightSchedulerTest.c\
 		./AllTests.c\
 
-INC_DIRS=-I./../src -I$(UNITY_ROOT)/src -I$(UNITY_ROOT)/extras/fixture/src -I./../mock
+INC_DIRS=-I./../src\
+		 -I$(UNITY_ROOT)/src\
+		 -I$(UNITY_ROOT)/extras/fixture/src\
+		 -I./../mock\
+		 -I./../depend_src\
+
 SYMBOLS=
 
 all: clean default
