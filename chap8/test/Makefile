@@ -26,7 +26,7 @@ ifeq ($(shell uname -s), Darwin)
 C_COMPILER=clang
 endif
 
-UNITY_ROOT=./../Unity
+UNITY_ROOT=./../../../Unity
 
 CFLAGS=-std=c99
 CFLAGS += -Wall
@@ -43,30 +43,30 @@ CFLAGS += -Wstrict-prototypes
 CFLAGS += -Wundef
 CFLAGS += -Wold-style-definition
 
+
 TARGET_BASE=chap8
 TARGET = $(TARGET_BASE)$(TARGET_EXTENSION)
 SRC_FILES=$(UNITY_ROOT)/src/unity.c\
-		$(UNITY_ROOT)/src/unity.c\
-		src/ProductionCode.c\
-		test/TestProductionCode.c\
-		test/test_runners/TestProductionCode_Runner.c\
+		$(UNITY_ROOT)/extras/fixture/src/unity_fixture.c\
+		./../mock/FakeTimeService.c\
+		./../mock/LightControllerSpy.c\
+		./../src/LightScheduler.c\
+		./LightControllerSpyTest.c\
+		./LightSchedulerTestRunner.c\
+		./LightSchedulerTest.c\
+		./AllTests.c\
 
-INC_DIRS=-Isrc -I$(UNITY_ROOT)/src
+INC_DIRS=-I./../src -I$(UNITY_ROOT)/src -I$(UNITY_ROOT)/extras/fixture/src -I./../mock
 SYMBOLS=
 
 all: clean default
 
-default: $(SRC_FILES) $(SRC_FILES2)
+default: $(SRC_FILES)
 	$(C_COMPILER) $(CFLAGS) $(INC_DIRS) $(SYMBOLS) $(SRC_FILES) -o $(TARGET)
 	- ./$(TARGET)
-	./$(TARGET2)
-
-test/test_runners/TestProductionCode_Runner.c\
-: test/TestProductionCode.c
-	ruby $(UNITY_ROOT)/auto/generate_test_runner.rb test/TestProductionCode.c  test/test_runners/TestProductionCode_Runner.c
 
 clean:
-	$(CLEANUP) $(TARGET) $(TARGET2)
+	$(CLEANUP) $(TARGET)
 
 ci: CFLAGS += -Werror
 ci: default
