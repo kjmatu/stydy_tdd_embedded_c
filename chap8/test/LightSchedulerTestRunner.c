@@ -5,4 +5,5 @@
 TEST_GROUP_RUNNER(LightScheduler)
 {
     RUN_TEST_CASE(LightScheduler, NoChangeToLightsDuringInitialization);
+    RUN_TEST_CASE(LightScheduler, NoScheduleNothingHappens);
 }
