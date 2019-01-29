@@ -55,6 +55,8 @@ SRC_FILES=$(UNITY_ROOT)/src/unity.c\
 		./LightControllerSpyTestRunner.c\
 		./LightSchedulerTestRunner.c\
 		./LightSchedulerTest.c\
+		./FakeTimeServiceTestRunner.c\
+		./FakeTimeServiceTest.c\
 		./AllTests.c\
 
 INC_DIRS=-I./../src\

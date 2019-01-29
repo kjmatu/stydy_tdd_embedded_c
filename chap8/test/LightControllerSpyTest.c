@@ -16,13 +16,13 @@ TEST_TEAR_DOWN(LightControllerSpy)
 
 TEST(LightControllerSpy, Create)
 {
-    TEST_ASSERT_EQUAL_INT32(LIGHT_ID_UNKNOWN, LightControllerSpy_GetLastId());
-    TEST_ASSERT_EQUAL_INT32(LIGHT_ID_UNKNOWN, LightControllerSpy_GetLastState());
+    TEST_ASSERT_EQUAL_INT(LIGHT_ID_UNKNOWN, LightControllerSpy_GetLastId());
+    TEST_ASSERT_EQUAL_INT(LIGHT_ID_UNKNOWN, LightControllerSpy_GetLastState());
 }
 
 TEST(LightControllerSpy, RememberTheLastLightIdControlled)
 {
     LightController_TurnOn(10);
-    TEST_ASSERT_EQUAL_INT32(10, LightControllerSpy_GetLastId());
-    TEST_ASSERT_EQUAL_INT32(LIGHT_ON, LightControllerSpy_GetLastState());
+    TEST_ASSERT_EQUAL_INT(10, LightControllerSpy_GetLastId());
+    TEST_ASSERT_EQUAL_INT(LIGHT_ON, LightControllerSpy_GetLastState());
 }
