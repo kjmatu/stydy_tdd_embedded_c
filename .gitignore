@@ -6,3 +6,6 @@
 *.testpass
 
 HomeAutomation_tests
+
+./Unity/*
+./cpputest/*
