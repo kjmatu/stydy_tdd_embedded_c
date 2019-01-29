@@ -34,3 +34,13 @@ TEST(LightScheduler, NoScheduleNothingHappens)
     TEST_ASSERT_EQUAL_INT(LIGHT_ID_UNKNOWN, LightControllerSpy_GetLastId());
     TEST_ASSERT_EQUAL_INT(LIGHT_ID_UNKNOWN, LightControllerSpy_GetLastState());
 }
+
+TEST(LightScheduler, ScheduleOnEverydayNotTimeYet)
+{
+    LightScheduler_TuenOn(3, EVERYDAY, 1200);
+    FakeTimeService_SetDay(MONDAY);
+    FakeTimeService_SetMinute(1199);
+    LightScheduler_Wakeup();
+    TEST_ASSERT_EQUAL_INT(LIGHT_ID_UNKNOWN, LightControllerSpy_GetLastId());
+    TEST_ASSERT_EQUAL_INT(LIGHT_ID_UNKNOWN, LightControllerSpy_GetLastState());
+}
