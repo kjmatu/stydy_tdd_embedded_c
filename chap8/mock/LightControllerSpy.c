@@ -2,6 +2,7 @@
 
 static int lastId;
 static int lastState;
+static int lightStateList[MAX_LIGHTS];
 
 void LightController_Create(void)
 {
@@ -19,12 +20,14 @@ void LightController_TurnOn(int id)
 {
     lastId = id;
     lastState = LIGHT_ON;
+    lightStateList[id] = LIGHT_ON;
 }
 
 void LightController_TurnOff(int id)
 {
     lastId = id;
     lastState = LIGHT_OFF;
+    lightStateList[id] = LIGHT_OFF;
 }
 
 int LightControllerSpy_GetLastId(void)
@@ -35,4 +38,9 @@ int LightControllerSpy_GetLastId(void)
 int LightControllerSpy_GetLastState(void)
 {
     return lastState;
+}
+
+int LightControllerSpy_GetLightState(int id)
+{
+    return lightStateList[id];
 }
