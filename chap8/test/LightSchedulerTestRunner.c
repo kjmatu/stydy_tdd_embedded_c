@@ -10,4 +10,5 @@ TEST_GROUP_RUNNER(LightScheduler)
     RUN_TEST_CASE(LightScheduler, ScheduleOnEverydayItsTime);
     RUN_TEST_CASE(LightScheduler, ScheduleOffEverydayItsTime);
     RUN_TEST_CASE(LightScheduler, ScheduleWeekEndItsMonday);
+    RUN_TEST_CASE(LightScheduler, ShceduleTuesdayButItsMonday);
 }
