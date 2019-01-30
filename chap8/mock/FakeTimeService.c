@@ -2,6 +2,8 @@
 
 
 static Time fTime;
+static WakeUpCallback cb;
+static int periodSec;
 
 void TimeService_Create(void)
 {
@@ -30,6 +32,11 @@ void TimeService_GetTime(Time *time)
     *time = fTime;
 }
 
+void TimeService_SetPeriodicAlarmInSeconds(int seconds, WakeUpCallback inCb)
+{
+    cb = inCb;
+    periodSec = seconds;
+}
 
 void FakeTimeService_SetMinute(int minutes)
 {
@@ -40,3 +47,15 @@ void FakeTimeService_SetDay(Day day)
 {
     fTime.dayOfWeek = day;
 }
+
+WakeUpCallback FakeTimeService_GetAlarmCallback(void)
+{
+    return cb;
+}
+
+int FakeTimeService_GetAlarmPeriod(void)
+{
+    return periodSec;
+}
+
+
