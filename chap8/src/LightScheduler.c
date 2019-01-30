@@ -25,6 +25,25 @@ static void scheduleEvent(int id, Day day, int minutesOfDay, int event)
     scheduledEvent.event = event;
 }
 
+static void operateLight(ScheduledLightEvent *lightEvent)
+{
+    if (lightEvent->event == TURN_ON) {
+        LightController_TurnOn(lightEvent->id);
+    }
+    else if (lightEvent->event == TURN_OFF) {
+        LightController_TurnOff(lightEvent->id);
+    }
+}
+
+static void processEventDueNow(Time *time, ScheduledLightEvent *lightEvent)
+{
+    if (lightEvent->id == UNUSED) return;
+
+    if (lightEvent->minutesOfDay != time->minuteOfDay) return;
+
+    operateLight(lightEvent);
+}
+
 void LightScheduler_Create(void)
 {
     scheduledEvent.id = UNUSED;
@@ -40,16 +59,7 @@ void LightScheduler_Wakeup(void)
     Time time;
     TimeService_GetTime(&time);
 
-    if (scheduledEvent.id == UNUSED) return;
-
-    if (time.minuteOfDay != scheduledEvent.minutesOfDay) return;
-
-    if (scheduledEvent.event == TURN_ON) {
-        LightController_TurnOn(scheduledEvent.id);
-    }
-    else if (scheduledEvent.event == TURN_OFF) {
-        LightController_TurnOff(scheduledEvent.id);
-    }
+    processEventDueNow(&time, &scheduledEvent);
 }
 
 void LightScheduler_TurnOn(int id, Day day, int minuteOfDay)
