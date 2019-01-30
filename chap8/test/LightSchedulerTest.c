@@ -19,6 +19,18 @@ TEST_TEAR_DOWN(LightScheduler)
     LightScheduler_Destroy();
 }
 
+static void setTimeTo(int day, int minuteOfDay)
+{
+    FakeTimeService_SetDay(day);
+    FakeTimeService_SetMinute(minuteOfDay);
+}
+
+static void checkLightState(int id, int level)
+{
+    TEST_ASSERT_EQUAL_INT(id, LightControllerSpy_GetLastId());
+    TEST_ASSERT_EQUAL_INT(level, LightControllerSpy_GetLastState());
+}
+
 TEST(LightScheduler, NoChangeToLightsDuringInitialization)
 {
     LightScheduler_Wakeup();
@@ -28,42 +40,31 @@ TEST(LightScheduler, NoChangeToLightsDuringInitialization)
 
 TEST(LightScheduler, NoScheduleNothingHappens)
 {
-    FakeTimeService_SetDay(MONDAY);
-    FakeTimeService_SetMinute(100);
+    setTimeTo(MONDAY, 100);
     LightScheduler_Wakeup();
-    TEST_ASSERT_EQUAL_INT(LIGHT_ID_UNKNOWN, LightControllerSpy_GetLastId());
-    TEST_ASSERT_EQUAL_INT(LIGHT_ID_UNKNOWN, LightControllerSpy_GetLastState());
+    checkLightState(LIGHT_ID_UNKNOWN, LIGHT_ID_UNKNOWN);
 }
 
 TEST(LightScheduler, ScheduleOnEverydayNotTimeYet)
 {
     LightScheduler_TurnOn(3, EVERYDAY, 1200);
-    FakeTimeService_SetDay(MONDAY);
-    FakeTimeService_SetMinute(1199);
+    setTimeTo(MONDAY, 1199);
     LightScheduler_Wakeup();
-    TEST_ASSERT_EQUAL_INT(LIGHT_ID_UNKNOWN, LightControllerSpy_GetLastId());
-    TEST_ASSERT_EQUAL_INT(LIGHT_ID_UNKNOWN, LightControllerSpy_GetLastState());
+    checkLightState(LIGHT_ID_UNKNOWN, LIGHT_ID_UNKNOWN);
 }
 
 TEST(LightScheduler, ScheduleOnEverydayItsTime)
 {
     LightScheduler_TurnOn(3, EVERYDAY, 1200);
-    FakeTimeService_SetDay(MONDAY);
-    FakeTimeService_SetMinute(1200);
-
+    setTimeTo(MONDAY, 1200);
     LightScheduler_Wakeup();
-
-    TEST_ASSERT_EQUAL_INT(3, LightControllerSpy_GetLastId());
-    TEST_ASSERT_EQUAL_INT(LIGHT_ON, LightControllerSpy_GetLastState());
+    checkLightState(3, LIGHT_ON);
 }
 
 TEST(LightScheduler, ScheduleOffEverydayItsTime)
 {
     LightScheduler_TurnOff(3, EVERYDAY, 1200);
-    FakeTimeService_SetDay(MONDAY);
-    FakeTimeService_SetMinute(1200);
+    setTimeTo(MONDAY, 1200);
     LightScheduler_Wakeup();
-
-    TEST_ASSERT_EQUAL_INT(3, LightControllerSpy_GetLastId());
-    TEST_ASSERT_EQUAL_INT(LIGHT_OFF, LightControllerSpy_GetLastState());
+    checkLightState(3, LIGHT_OFF);
 }
