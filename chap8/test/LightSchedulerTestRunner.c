@@ -12,4 +12,7 @@ TEST_GROUP_RUNNER(LightScheduler)
     RUN_TEST_CASE(LightScheduler, ScheduleWeekEndItsMonday);
     RUN_TEST_CASE(LightScheduler, ShceduleTuesdayButItsMonday);
     RUN_TEST_CASE(LightScheduler, ScheduleTuesdayAndItsTuesday);
+    RUN_TEST_CASE(LightScheduler, ScheduleWeekEndItsFriday);
+    RUN_TEST_CASE(LightScheduler, ScheduleWeekEndItsSaturday);
+    RUN_TEST_CASE(LightScheduler, ScheduleWeekEndItsSunday);
 }
