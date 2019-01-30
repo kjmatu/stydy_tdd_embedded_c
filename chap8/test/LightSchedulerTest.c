@@ -55,5 +55,15 @@ TEST(LightScheduler, ScheduleOnEverydayItsTime)
 
     TEST_ASSERT_EQUAL_INT(3, LightControllerSpy_GetLastId());
     TEST_ASSERT_EQUAL_INT(LIGHT_ON, LightControllerSpy_GetLastState());
+}
 
+TEST(LightScheduler, ScheduleOffEverydayItsTime)
+{
+    LightScheduler_TurnOff(3, EVERYDAY, 1200);
+    FakeTimeService_SetDay(MONDAY);
+    FakeTimeService_SetMinute(1200);
+    LightScheduler_Wakeup();
+
+    TEST_ASSERT_EQUAL_INT(3, LightControllerSpy_GetLastId());
+    TEST_ASSERT_EQUAL_INT(LIGHT_OFF, LightControllerSpy_GetLastState());
 }
