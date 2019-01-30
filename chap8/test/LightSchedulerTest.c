@@ -117,3 +117,23 @@ TEST(LightScheduler, ScheduleWeekEndItsSunday)
     LightScheduler_Wakeup();
     checkLightState(3, LIGHT_ON);
 }
+
+
+TEST_GROUP(LightSchedulerInitAndCleanup);
+
+TEST_SETUP(LightSchedulerInitAndCleanup)
+{
+}
+
+TEST_TEAR_DOWN(LightSchedulerInitAndCleanup)
+{
+}
+
+TEST(LightSchedulerInitAndCleanup, CreateStartsOneMinuteAlarm)
+{
+    LightScheduler_Create();
+    TEST_ASSERT_POINTERS_EQUAL((void *)LightScheduler_Wakeup,
+                               (void *)FakeTimeService_GetAlarmCallback());
+    TEST_ASSERT_EQUAL_INT(60, FakeTimeService_GetAlarmPeriod());
+    LightScheduler_Destroy();
+}

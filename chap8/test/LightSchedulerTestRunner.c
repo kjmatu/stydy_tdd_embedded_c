@@ -16,3 +16,8 @@ TEST_GROUP_RUNNER(LightScheduler)
     RUN_TEST_CASE(LightScheduler, ScheduleWeekEndItsSaturday);
     RUN_TEST_CASE(LightScheduler, ScheduleWeekEndItsSunday);
 }
+
+TEST_GROUP_RUNNER(LightSchedulerInitAndCleanup)
+{
+    RUN_TEST_CASE(LightSchedulerInitAndCleanup, CreateStartsOneMinuteAlarm);
+}
