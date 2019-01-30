@@ -20,4 +20,5 @@ TEST_GROUP_RUNNER(LightScheduler)
 TEST_GROUP_RUNNER(LightSchedulerInitAndCleanup)
 {
     RUN_TEST_CASE(LightSchedulerInitAndCleanup, CreateStartsOneMinuteAlarm);
+    RUN_TEST_CASE(LightSchedulerInitAndCleanup, DestroyCancelsOneMinuteAlarm);
 }

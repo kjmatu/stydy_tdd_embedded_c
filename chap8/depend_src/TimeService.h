@@ -67,5 +67,6 @@ BOOL TimeService_MatchesMinuteOfDay(const Time *, int minute);
 BOOL TimeService_MatchesNow(int reactionDay, int minute);
 
 void TimeService_SetPeriodicAlarmInSeconds(int seconds, WakeUpCallback cb);
+void TimeService_CancelPeriodicAlarmInSeconds(int seconds, WakeUpCallback cb);
 
 #endif  /* D_TimeService_H */

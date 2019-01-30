@@ -2,7 +2,7 @@
 
 
 static Time fTime;
-static WakeUpCallback cb;
+static WakeUpCallback callback;
 static int periodSec;
 
 void TimeService_Create(void)
@@ -34,8 +34,17 @@ void TimeService_GetTime(Time *time)
 
 void TimeService_SetPeriodicAlarmInSeconds(int seconds, WakeUpCallback inCb)
 {
-    cb = inCb;
+    callback = inCb;
     periodSec = seconds;
+}
+
+void TimeService_CancelPeriodicAlarmInSeconds(int seconds, WakeUpCallback cb)
+{
+    if (cb == callback && periodSec == seconds)
+    {
+        callback = NULL;
+        periodSec = 0;
+    }
 }
 
 void FakeTimeService_SetMinute(int minutes)
@@ -50,7 +59,7 @@ void FakeTimeService_SetDay(Day day)
 
 WakeUpCallback FakeTimeService_GetAlarmCallback(void)
 {
-    return cb;
+    return callback;
 }
 
 int FakeTimeService_GetAlarmPeriod(void)
