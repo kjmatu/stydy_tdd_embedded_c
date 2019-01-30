@@ -6,6 +6,6 @@
 void LightScheduler_Wakeup(void);
 void LightScheduler_Create(void);
 void LightScheduler_Destroy(void);
-void LightScheduler_TuenOn(int id, Day day, int minuteOfDay);
+void LightScheduler_TurnOn(int id, Day day, int minuteOfDay);
 
 #endif
