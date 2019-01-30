@@ -27,8 +27,13 @@ static void setTimeTo(int day, int minuteOfDay)
 
 static void checkLightState(int id, int level)
 {
-    TEST_ASSERT_EQUAL_INT(id, LightControllerSpy_GetLastId());
-    TEST_ASSERT_EQUAL_INT(level, LightControllerSpy_GetLastState());
+    if (id == LIGHT_ID_UNKNOWN) {
+        TEST_ASSERT_EQUAL_INT(id, LightControllerSpy_GetLastId());
+        TEST_ASSERT_EQUAL_INT(level, LightControllerSpy_GetLastState());
+    }
+    else {
+        TEST_ASSERT_EQUAL_INT(level, LightControllerSpy_GetLightState(id));
+    }
 }
 
 TEST(LightScheduler, NoChangeToLightsDuringInitialization)

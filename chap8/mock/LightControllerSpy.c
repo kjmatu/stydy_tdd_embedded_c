@@ -2,7 +2,7 @@
 
 static int lastId;
 static int lastState;
-static int lightStateList[MAX_LIGHTS];
+static int lightStateList[MAX_LIGHTS] = {LIGHT_STATE_UNKNOWN};
 
 void LightController_Create(void)
 {
