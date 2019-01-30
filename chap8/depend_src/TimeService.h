@@ -1,9 +1,9 @@
 /***
  * Excerpted from "Test-Driven Development for Embedded C",
  * published by The Pragmatic Bookshelf.
- * Copyrights apply to this code. It may not be used to create training material, 
+ * Copyrights apply to this code. It may not be used to create training material,
  * courses, books, articles, and the like. Contact us if you are in doubt.
- * We make no guarantees that this code is fit for any purpose. 
+ * We make no guarantees that this code is fit for any purpose.
  * Visit http://www.pragmaticprogrammer.com/titles/jgade for more book information.
 ***/
 /*- ------------------------------------------------------------------ -*/
@@ -53,6 +53,8 @@ struct Time
     Month month;
 };
 
+typedef void (*WakeUpCallback)(void);
+
 void TimeService_Create(void);
 void TimeService_Destroy(void);
 int TimeService_GetMinute(void);
@@ -63,5 +65,7 @@ void TimeService_GetTime(Time *);
 BOOL TimeService_MatchesDayOfWeek(const Time *, Day day);
 BOOL TimeService_MatchesMinuteOfDay(const Time *, int minute);
 BOOL TimeService_MatchesNow(int reactionDay, int minute);
+
+void TimeService_SetPeriodicAlarmInSeconds(int seconds, WakeUpCallback cb);
 
 #endif  /* D_TimeService_H */
